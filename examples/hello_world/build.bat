@@ -1,7 +1,7 @@
 @echo off
-for /f "tokens=2-4 delims=/ " %%a in ('date /t') do (set date=%%c%%a%%b)
-for /f "tokens=1-2 delims=/:" %%a in ("%TIME%") do (set time=%%a%%b)
+for /f "tokens=2 delims==" %%I in ('wmic os get localdatetime /format:list') do set datetime=%%I
+set datetime=%datetime:~0,8%_%datetime:~8,6%
 
-vasmm68k_mot -Fbin main.s -o build_%date%_%time%.bin -nowarn=51
+vasmm68k_mot -Fbin main.s -o build_%datetime%.bin -nowarn=51
 
 pause
